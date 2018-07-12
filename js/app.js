@@ -1,5 +1,50 @@
+class Enemy {
+    constructor(x, y) {
+        this.sprite = 'images/enemy-bug.png';
+        this.x = x;
+        this.y = y;
+    }
+
+    update(dt) {
+
+    }
+
+    render(x, y) {
+        ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+    }
+}
+
+const enemy1 = new Enemy(180, 50);
+const enemy2 = new Enemy(280, 140);
+const enemy3 = new Enemy(100, 140);
+const enemy4 = new Enemy(150, 220);
+
+const allEnemies = [enemy1, enemy2, enemy3, enemy4];
+
+class Player {
+    constructor(x, y) {
+        this.sprite = 'images/char-boy.png';
+        this.x = x;
+        this.y = y;
+    }
+
+    update() {
+
+    }
+
+    render() {
+        ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+    }
+
+    handleInput(key) {
+        
+    }
+}
+
+const player = new Player(200, 380);
+player.render();
 // Enemies our player must avoid
-var Enemy = function() {
+/*var Enemy = function() {
     // Variables applied to each of our instances go here,
     // we've provided one for you to get started
 
@@ -19,7 +64,7 @@ Enemy.prototype.update = function(dt) {
 // Draw the enemy on the screen, required method for game
 Enemy.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
-};
+};*/
 
 // Now write your own player class
 // This class requires an update(), render() and
