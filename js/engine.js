@@ -79,6 +79,7 @@ var Engine = (function(global) {
      */
     function update(dt) {
         updateEntities(dt);
+        player.bounds();
         // checkCollisions();
     }
 
