@@ -1,25 +1,23 @@
 class Enemy {
-    constructor(x, y) {
+    constructor(x, y, speed) {
         this.sprite = 'images/enemy-bug.png';
         this.x = x;
         this.y = y;
+        this.speed = speed;
     }
 
-    update(dt) {
+    update(dt, speed) {
+        this.x += this.speed;
 
+        if (this.x > 500) {
+            this.x = 0;
+        }
     }
 
     render(x, y) {
         ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
     }
 }
-
-const enemy1 = new Enemy(180, 50);
-const enemy2 = new Enemy(280, 140);
-const enemy3 = new Enemy(100, 140);
-const enemy4 = new Enemy(150, 220);
-
-const allEnemies = [enemy1, enemy2, enemy3, enemy4];
 
 class Player {
     constructor(x, y) {
@@ -29,7 +27,6 @@ class Player {
     }
 
     update() {
-
     }
 
     render() {
@@ -37,12 +34,37 @@ class Player {
     }
 
     handleInput(key) {
-        
+        switch(key) {
+           case 'up':
+           case 'w':
+                this.y -= 80;
+                break;
+            case 'down':
+            case 's':
+                    this.y += 80;
+                    break;
+            case 'left':
+            case 'a':
+                    this.x -= 80;
+                    break;
+            case 'right':
+            case 'd':
+                    this.x += 80;
+                    break;
+        } 
     }
 }
 
-const player = new Player(200, 380);
-player.render();
+const enemy1 = new Enemy(180, 50, 2);
+const enemy2 = new Enemy(280, 140, 4);
+const enemy3 = new Enemy(100, 140, 4);
+const enemy4 = new Enemy(150, 220, 6);
+
+const allEnemies = [enemy1, enemy2, enemy3, enemy4];
+
+const player = new Player(200, 370);
+
+
 // Enemies our player must avoid
 /*var Enemy = function() {
     // Variables applied to each of our instances go here,
@@ -84,7 +106,12 @@ document.addEventListener('keyup', function(e) {
         37: 'left',
         38: 'up',
         39: 'right',
-        40: 'down'
+        40: 'down',
+        87: 'w',
+        65: 'a',
+        83: 's',
+        68: 'd',
+        32: 'spacebar'
     };
 
     player.handleInput(allowedKeys[e.keyCode]);
