@@ -6,15 +6,15 @@ class Enemy {
         this.speed = speed;
     }
 
-    update(dt, speed) {
+    update(dt) {
         this.x += this.speed;
 
-        if (this.x > 500) {
+        if (this.x > 505) {
             this.x = 0;
         }
     }
 
-    render(x, y) {
+    render() {
         ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
     }
 }
@@ -53,16 +53,31 @@ class Player {
                     break;
         } 
     }
+
+    bounds() { 
+        if (this.x > 505 || this.x < 0) {
+            this.x = 200;
+        } 
+    }
 }
 
-const enemy1 = new Enemy(180, 50, 2);
-const enemy2 = new Enemy(280, 140, 4);
-const enemy3 = new Enemy(100, 140, 4);
-const enemy4 = new Enemy(150, 220, 6);
+const randSpeed1 = Math.floor(Math.random() * 6) + 1;
+const randSpeed2 = Math.floor(Math.random() * 6) + 1;
+const randSpeed3 = Math.floor(Math.random() * 6) + 1;
+
+const enemy1 = new Enemy(0, 50, randSpeed1);
+const enemy2 = new Enemy(300, 140, randSpeed2);
+const enemy3 = new Enemy(100, 140, randSpeed2);
+const enemy4 = new Enemy(200, 220, randSpeed3);
+console.log(`enemy1 speed: ${enemy1.speed}`);
+console.log(`enemy2 speed: ${enemy2.speed}`);
+console.log(`enemy3 speed: ${enemy3.speed}`);
+console.log(`enemy4 speed: ${enemy4.speed}`);
 
 const allEnemies = [enemy1, enemy2, enemy3, enemy4];
 
 const player = new Player(200, 370);
+player.bounds();
 
 
 // Enemies our player must avoid
