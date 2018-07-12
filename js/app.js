@@ -45,11 +45,11 @@ class Player {
                     break;
             case 'left':
             case 'a':
-                    this.x -= 80;
+                    this.x -= 100;
                     break;
             case 'right':
             case 'd':
-                    this.x += 80;
+                    this.x += 100;
                     break;
         } 
     }
