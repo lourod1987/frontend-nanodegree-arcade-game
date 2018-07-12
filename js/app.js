@@ -24,6 +24,11 @@ class Player {
         this.sprite = 'images/char-boy.png';
         this.x = x;
         this.y = y;
+        this.minBoundsX =  0;
+        this.maxBoundsX =  440;
+        this.minBoundsY =  -25;
+        this.maxBoundsY =  375;
+        this.moveSound = document.getElementById("moveSound");
     }
 
     update() {
@@ -38,26 +43,36 @@ class Player {
            case 'up':
            case 'w':
                 this.y -= 80;
+                this.moveSound.play();
                 break;
             case 'down':
             case 's':
                     this.y += 80;
+                    this.moveSound.play();
                     break;
             case 'left':
             case 'a':
                     this.x -= 100;
+                    this.moveSound.play();
                     break;
             case 'right':
             case 'd':
                     this.x += 100;
+                    this.moveSound.play();
                     break;
         } 
     }
 
     bounds() { 
-        if (this.x > 505 || this.x < 0) {
-            this.x = 200;
-        } 
+        if (this.x >= this.maxBoundsX) {
+            this.x = 400;
+        } else if (this.x <= this.minBoundsX) {
+            this.x =0;
+        } else if (this.y >= this.maxBoundsY) {
+            this.y = 370;
+        } else if (this.y <= this.minBoundsY) {
+            this.y = -20;
+        }
     }
 }
 
@@ -76,8 +91,7 @@ console.log(`enemy3 speed: ${enemy3.speed}`);
 console.log(`enemy4 speed: ${enemy4.speed}`); 
 
 const player = new Player(200, 370);
-player.bounds();
-
+console.log(player.maxBoundsX);
 
 // Enemies our player must avoid
 /*var Enemy = function() {
