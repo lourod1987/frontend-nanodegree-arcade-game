@@ -24,10 +24,10 @@ class Player {
         this.sprite = 'images/char-boy.png';
         this.x = x;
         this.y = y;
-        this.minBoundsX =  0;
-        this.maxBoundsX =  440;
-        this.minBoundsY =  -25;
-        this.maxBoundsY =  375;
+        this.minBoundsX = 0;
+        this.maxBoundsX = 440;
+        this.minBoundsY = 0;
+        this.maxBoundsY = 375;
         this.moveSound = document.getElementById("moveSound");
     }
 
@@ -67,8 +67,10 @@ class Player {
         if (this.x >= this.maxBoundsX) {
             this.x = 400;
         } else if (this.x <= this.minBoundsX) {
-            this.x =0;
-        } else if (this.y >= this.maxBoundsY) {
+            this.x = 0;
+        } 
+        
+        if (this.y >= this.maxBoundsY) {
             this.y = 370;
         } else if (this.y <= this.minBoundsY) {
             this.y = -20;
