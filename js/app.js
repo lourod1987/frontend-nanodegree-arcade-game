@@ -26,8 +26,8 @@ class Player {
         this.y = y;
         this.minBoundsX = 0;
         this.maxBoundsX = 440;
-        this.minBoundsY = 0;
-        this.maxBoundsY = 375;
+        this.minBoundsY = -20;
+        this.maxBoundsY = 380;
         this.moveSound = document.getElementById("moveSound");
     }
 
@@ -43,11 +43,13 @@ class Player {
            case 'up':
            case 'w':
                 this.y -= 80;
+                console.log(`current yPos Player: ${this.y}`);
                 this.moveSound.play();
                 break;
             case 'down':
             case 's':
                     this.y += 80;
+                    console.log(`current yPos Player: ${this.y}`);
                     this.moveSound.play();
                     break;
             case 'left':
@@ -71,29 +73,44 @@ class Player {
         } 
         
         if (this.y >= this.maxBoundsY) {
-            this.y = 370;
+            this.y = 380;
         } else if (this.y <= this.minBoundsY) {
             this.y = -20;
         }
     }
 }
 
+function checkCollision() {
+    
+    for (let i = 0; i < allEnemies.length; i++) {
+        if (player.x === allEnemies[i].x &&player.y === allEnemies[i].y) {
+            console.log(`Hit detected! Enemy ${i} hit me in allEnemies array`);
+            player.x = 200;
+            player.y = 380;
+            console.log(`After hit yPos Player: ${player.y}`);
+        }
+    }
+}
+
+
+const player = new Player(200, 380);
+
 const randSpeed1 = Math.floor(Math.random() * 6) + 1,
       randSpeed2 = Math.floor(Math.random() * 6) + 1,
       randSpeed3 = Math.floor(Math.random() * 6) + 1;
 
-const enemy1 = new Enemy(0, 50, randSpeed1),
+const enemy1 = new Enemy(0, 60, randSpeed1),
       enemy2 = new Enemy(300, 140, randSpeed2),
       enemy3 = new Enemy(100, 140, randSpeed2),
-      enemy4 = new Enemy(200, 220, randSpeed3),
+      enemy4 = new Enemy(215, 220, randSpeed3),
       allEnemies = [enemy1, enemy2, enemy3, enemy4];
 console.log(`enemy1 speed: ${enemy1.speed}`);
 console.log(`enemy2 speed: ${enemy2.speed}`);
 console.log(`enemy3 speed: ${enemy3.speed}`);
 console.log(`enemy4 speed: ${enemy4.speed}`); 
 
-const player = new Player(200, 370);
-console.log(player.maxBoundsX);
+
+
 
 // Enemies our player must avoid
 /*var Enemy = function() {
